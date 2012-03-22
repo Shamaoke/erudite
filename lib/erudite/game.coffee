@@ -10,8 +10,14 @@ class @Erudite.Game
   constructor: (output) ->
     @output = output
 
-  enter_coordinates: =>
-    @callback()
+  enter_coordinates: (input) =>
+    @callback() if @validates input
+
+  validates: (input) ->
+    unless input.split(',').length is 2
+      @output.write "Input must be of the form 'x,y'.\n"
+      return false
+    return true
 
   prompt_for_first_tile: ->
     @callback = ->
@@ -26,4 +32,4 @@ class @Erudite.Game
   start: ->
     @output.write "Welcome to Erudite!\n"
     @prompt_for_first_tile()
-    @enter_coordinates()
+    @callback()

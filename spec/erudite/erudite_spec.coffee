@@ -20,11 +20,18 @@ describe 'Erudite', ->
       beforeEach ->
         @game.start()
 
-      describe 'before entering coordinates for the first tile', ->
-        it 'prompts for coordinates for the first tile.', ->
-          @output_spy.calledWith("Please, enter coordinates for the first tile.\n").should.be.true
+      describe 'data are correct', ->
+        describe 'before entering coordinates for the first tile', ->
+          it 'prompts for coordinates for the first tile.', ->
+            @output_spy.calledWith("Please, enter coordinates for the first tile.\n").should.be.true
 
-      describe 'before entering coordinates for the second tile', ->
-        it 'prompts for coordinates for the second tile', ->
-          @game.enter_coordinates()
-          @output_spy.calledWith("Please, enter coordinates for the second tile.\n").should.be.true
+        describe 'before entering coordinates for the second tile', ->
+          it 'prompts for coordinates for the second tile', ->
+            @game.enter_coordinates('1,2')
+            @output_spy.calledWith("Please, enter coordinates for the second tile.\n").should.be.true
+
+      describe 'data are incorrect', ->
+        describe 'data have an incorrect format', ->
+          it 'informs about incorrect format', ->
+            @game.enter_coordinates "1,2,3"
+            @output_spy.calledWith("Input must be of the form 'x,y'.\n").should.be.true

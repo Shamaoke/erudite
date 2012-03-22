@@ -14,7 +14,11 @@ module.exports = ->
     callback()
 
   @When /^I enter(?:|ed) coordinates for the (?:first|second) tile$/, (callback) ->
-    @game.enter_coordinates()
+    @game.enter_coordinates('1,2')
+    callback()
+
+  @When /^I enter "([^"]*)"$/, (data, callback) ->
+    @game.enter_coordinates data
     callback()
 
   @Then /^I should see "([^"]*)" (.*)$/, (message, count, callback) ->
