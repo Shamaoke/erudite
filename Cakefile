@@ -12,12 +12,12 @@ task 'cucumber:wip', 'run wip features', (options) ->
   exec 'cucumber.js --tags @wip features/*.feature', (error, stdout, stderr) ->
     console.log stdout, stderr
 
-task 'compile', 'compile coffee files to lib', (options) ->
-  exec 'coffee --compile --join lib/erudite.js src/*.coffee', (error, stdout, stderr) ->
+task 'compile', 'compile coffee files to pkg', (options) ->
+  exec 'coffee --compile --join pkg/erudite.js lib/**/*.coffee', (error, stdout, stderr) ->
 
-task 'clear', 'clear the lib directory', (options) ->
-  fs.unlinkSync "lib/#{file}" for file in fs.readdirSync 'lib'
+task 'clear', 'clear the pkg directory', (options) ->
+  fs.unlinkSync "pkg/#{file}" for file in fs.readdirSync 'pkg'
 
 task 'spec', 'run all specs', (options) ->
-  exec 'mocha --colors --require should --reporter spec spec/*_spec.coffee', (error, stdout, stderr) ->
+  exec 'mocha --colors --require should --reporter spec spec/**/*_spec.coffee', (error, stdout, stderr) ->
     console.log stdout, stderr
