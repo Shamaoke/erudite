@@ -1,10 +1,16 @@
-@Erudite = { }
+@Erudite =
+  run: ->
+    process.stdin.resume()
+    process.stdin.setEncoding 'utf-8'
+    game = new @Game(process.stdout)
+    game.start()
+    process.stdin.addListener 'data', game.enter_coordinates
 
 class @Erudite.Game
   constructor: (output) ->
     @output = output
 
-  enter_coordinates: ->
+  enter_coordinates: =>
     @callback()
 
   prompt_for_first_tile: ->

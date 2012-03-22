@@ -1,0 +1,5 @@
+#! /usr/bin/env coffee
+
+Erudite = require('../lib/erudite')['Erudite']
+
+Erudite.run()
