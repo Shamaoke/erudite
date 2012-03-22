@@ -25,4 +25,12 @@ Feature: Erudite enters incorrect data
     When I enter "1,6"
     Then I should see "Each coordinate must be between 1 and 5." once
 
-  Scenario: Data are not integers
+  Scenario: X coordinate is not integer
+    Given I started a game
+    When I enter "a,1"
+    Then I should see "Each coordinate must be an integer." once
+
+  Scenario: Y coordinate is not integer
+    Given I started a game
+    When I enter "1,a"
+    Then I should see "Each coordinate must be an integer." once
