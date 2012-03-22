@@ -8,9 +8,13 @@ module.exports = ->
       write: (message) -> @_messages.push message
     callback()
 
-  @When /^I start a game$/, (callback) ->
-    game = new @Erudite.Game(@Output)
-    game.start()
+  @When /^I start(?:|ed) a game$/, (callback) ->
+    @game = new @Erudite.Game(@Output)
+    @game.start()
+    callback()
+
+  @When /^I enter coordinates for the first tile$/, (callback) ->
+    @game.enter_coordinates()
     callback()
 
   @Then /^I should see "([^"]*)"$/, (message, callback) ->
