@@ -1,1 +1,1 @@
-@Erudite = require('./erudite/game')['Erudite']
+{ Erudite: @Erudite } = require './erudite/game'

@@ -1,5 +1,5 @@
 #! /usr/bin/env coffee
 
-Erudite = require('../lib/erudite')['Erudite']
+{ Erudite } = require '../lib/erudite'
 
 Erudite.run()

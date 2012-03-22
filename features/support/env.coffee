@@ -1,5 +1,5 @@
 require 'should'
 
 @World = (callback) ->
-  @Erudite = require('../../lib/erudite')['Erudite']
+  { Erudite: @Erudite } = require '../../lib/erudite'
   callback @

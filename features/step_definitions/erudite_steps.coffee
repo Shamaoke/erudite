@@ -1,5 +1,5 @@
 module.exports = ->
-  @World = require('../support/env')['World']
+  { World: @World } = require '../support/env'
 
   @Before (callback) ->
     @Output =
@@ -13,11 +13,7 @@ module.exports = ->
     @game.start()
     callback()
 
-  @When /^I enter(?:|ed) coordinates for the (?:first|second) tile$/, (callback) ->
-    @game.enter_coordinates('1,2')
-    callback()
-
-  @When /^I enter "([^"]*)"$/, (data, callback) ->
+  @When /^I enter(?:|ed) "([^"]*)"$/, (data, callback) ->
     @game.enter_coordinates data
     callback()
 

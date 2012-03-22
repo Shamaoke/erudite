@@ -1,9 +1,9 @@
 describe 'Erudite', ->
   describe 'Game', ->
     beforeEach ->
-      sinon   = require('sinon')
-      Erudite = require('../../lib/erudite')['Erudite']
-      output  = { write: -> }
+      sinon = require 'sinon'
+      { Erudite } = require '../../lib/erudite'
+      output = { write: -> }
       @output_spy = sinon.spy output, 'write'
       @game = new Erudite.Game(output)
 
@@ -36,32 +36,18 @@ describe 'Erudite', ->
             @game.enter_coordinates "1,2,3"
             @output_spy.calledWith("Input must be of the form 'x,y'.\n").should.be.true
 
-        describe 'X is less than 1', ->
+        describe 'data are in incorrect range', ->
           it 'informs about correct range', ->
-            @game.enter_coordinates "0,1"
-            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+            callback = (coords) ->
+              @game.enter_coordinates coords
+              @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
 
-        describe 'X is greater than 5', ->
-          it 'informs about correct range', ->
-            @game.enter_coordinates "6,1"
-            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+            ['0,1', '6,1', '1,0', '1,6'].forEach callback.bind(@)
 
-        describe 'Y is less than 1', ->
-          it 'informs about correct range', ->
-            @game.enter_coordinates "1,0"
-            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
-
-        describe 'Y is greater than 5', ->
-          it 'informs about correct range', ->
-            @game.enter_coordinates "1,6"
-            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
-
-        describe 'X is not integer', ->
+        describe 'data are in incorrect type', ->
           it 'informs about correct type', ->
-            @game.enter_coordinates "a,1"
-            @output_spy.calledWith("Each coordinate must be an integer.\n").should.be.true
+            callback = (coords) ->
+              @game.enter_coordinates coords
+              @output_spy.calledWith("Each coordinate must be an integer.\n").should.be.true
 
-        describe 'Y is not integer', ->
-          it 'informs about correct type', ->
-            @game.enter_coordinates "1,a"
-            @output_spy.calledWith("Each coordinate must be an integer.\n").should.be.true
+            ['a,1', '1,a'].forEach callback.bind(@)

@@ -1,5 +1,4 @@
-exec = require('child_process')['exec']
-fs   = require('fs')
+[ { exec }, fs ] = [ require('child_process'), require('fs') ]
 
 task 'cucumber', 'run all features', (options) ->
   invoke 'cucumber:all'
