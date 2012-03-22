@@ -14,20 +14,31 @@ class @Erudite.Game
     @callback() if @validates input
 
   validates: (input) ->
+    data = input.split(',')
+
+    x = parseInt data[0], 10
+    y = parseInt data[1], 10
+
     unless input.split(',').length is 2
       @output.write "Input must be of the form 'x,y'.\n"
       return false
-    else if input.split(',')[0] < 1
+    else if x < 1
       @output.write "Each coordinate must be between 1 and 5.\n"
       return false
-    else if input.split(',')[0] > 5
+    else if x > 5
       @output.write "Each coordinate must be between 1 and 5.\n"
       return false
-    else if input.split(',')[1] < 1
+    else if y < 1
       @output.write "Each coordinate must be between 1 and 5.\n"
       return false
-    else if input.split(',')[1] > 5
+    else if y > 5
       @output.write "Each coordinate must be between 1 and 5.\n"
+      return false
+    else if x isnt Math.round x
+      @output.write "Each coordinate must be an integer.\n"
+      return false
+    else if y isnt Math.round y
+      @output.write "Each coordinate must be an integer.\n"
       return false
     return true
 

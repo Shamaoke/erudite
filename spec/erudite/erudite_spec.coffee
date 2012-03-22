@@ -55,3 +55,13 @@ describe 'Erudite', ->
           it 'informs about correct range', ->
             @game.enter_coordinates "1,6"
             @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+
+        describe 'X is not integer', ->
+          it 'informs about correct type', ->
+            @game.enter_coordinates "a,1"
+            @output_spy.calledWith("Each coordinate must be an integer.\n").should.be.true
+
+        describe 'Y is not integer', ->
+          it 'informs about correct type', ->
+            @game.enter_coordinates "1,a"
+            @output_spy.calledWith("Each coordinate must be an integer.\n").should.be.true
