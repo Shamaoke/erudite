@@ -13,10 +13,14 @@ module.exports = ->
     @game.start()
     callback()
 
-  @When /^I enter coordinates for the first tile$/, (callback) ->
+  @When /^I enter(?:|ed) coordinates for the (?:first|second) tile$/, (callback) ->
     @game.enter_coordinates()
     callback()
 
-  @Then /^I should see "([^"]*)"$/, (message, callback) ->
-    @Output.messages().should.include message.concat "\n"
+  @Then /^I should see "([^"]*)" (.*)$/, (message, count, callback) ->
+    messages = @Output.messages().filter( (elm) -> elm is message.concat "\n" )
+    if count is 'once'
+      messages.length.should.eql 1
+    else if count is 'twice'
+      messages.length.should.eql 2
     callback()
