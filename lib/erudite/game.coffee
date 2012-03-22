@@ -17,6 +17,18 @@ class @Erudite.Game
     unless input.split(',').length is 2
       @output.write "Input must be of the form 'x,y'.\n"
       return false
+    else if input.split(',')[0] < 1
+      @output.write "Each coordinate must be between 1 and 5.\n"
+      return false
+    else if input.split(',')[0] > 5
+      @output.write "Each coordinate must be between 1 and 5.\n"
+      return false
+    else if input.split(',')[1] < 1
+      @output.write "Each coordinate must be between 1 and 5.\n"
+      return false
+    else if input.split(',')[1] > 5
+      @output.write "Each coordinate must be between 1 and 5.\n"
+      return false
     return true
 
   prompt_for_first_tile: ->

@@ -32,6 +32,26 @@ describe 'Erudite', ->
 
       describe 'data are incorrect', ->
         describe 'data have an incorrect format', ->
-          it 'informs about incorrect format', ->
+          it 'informs about correct format', ->
             @game.enter_coordinates "1,2,3"
             @output_spy.calledWith("Input must be of the form 'x,y'.\n").should.be.true
+
+        describe 'X is less than 1', ->
+          it 'informs about correct range', ->
+            @game.enter_coordinates "0,1"
+            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+
+        describe 'X is greater than 5', ->
+          it 'informs about correct range', ->
+            @game.enter_coordinates "6,1"
+            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+
+        describe 'Y is less than 1', ->
+          it 'informs about correct range', ->
+            @game.enter_coordinates "1,0"
+            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
+
+        describe 'Y is greater than 5', ->
+          it 'informs about correct range', ->
+            @game.enter_coordinates "1,6"
+            @output_spy.calledWith("Each coordinate must be between 1 and 5.\n").should.be.true
